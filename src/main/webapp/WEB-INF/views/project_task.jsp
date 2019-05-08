@@ -70,7 +70,7 @@
                 <td>${task.topic}</td>
                 <td>${user.name}</td>
                 <td>
-                    <a href="<c:url value="task_details">
+                    <a href="<c:url value="task_description">
                         <c:param name="task_id" value="${task.id}"/>
                     </c:url>">Szczegoly</a>
                     /
@@ -80,71 +80,6 @@
                 </td>
             </tr>
         </c:forEach>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr><tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr><tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr><tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr><tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr><tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Zadanie testowe</td>
-            <td>Jan Kowalski</td>
-            <td>
-                <a href="projekty_lista_zadan_szczegoly_zadania.html">szczegóły</a>
-                /
-                <a href="projekty_lista_zadan_edycja_zadania.html">edycja</a>
-            </td>
-        </tr>
         </tbody>
     </table>
 </div>

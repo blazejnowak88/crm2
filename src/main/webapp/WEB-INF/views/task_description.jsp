@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
 <html>
@@ -25,13 +26,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="index">Home</a>
+                <a class="nav-link" href="../index">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="projects">Projekty</a>
+                <a class="nav-link" href="../projects">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="users">Użytkownicy</a>
+                <a class="nav-link" href="../users">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="statusy.html">Statusy</a>
@@ -45,42 +46,35 @@
 <!-- HEADER END -->
 
 <div class="row m-5">
-    <div class="col-8">
-        <h1>Lista zadań projektu: ${project.name}</h1>
+    <div class="col-12">
+        <h1>Szczegóły zadania</h1>
     </div>
-    <div class="col-4 text-right">
-        <a href="add_task" class="btn btn-primary">Dodaj nowe zadanie</a>
-    </div>
-    <div class="clearfix"></div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Data utworzenia</th>
-            <th>Temat</th>
-            <th>Użytkownik</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${project.tasks}" var="task">
+    <div class="col-12">
+        <table class="table">
+            <tbody>
             <tr>
-                <td>${task.created}</td>
-                <td>${task.topic}</td>
-                <td>${user.name}</td>
-                <td>
-                    <a href="<c:url value="task/task_description">
-                        <c:param name="task_id" value="${task.id}"/>
-                    </c:url>">Szczegoly</a>
-                    /
-                    <a href="<c:url value="task/task_edition">
-                        <c:param name="task_id" value="${task.id}"/>
-                    </c:url>">Edycja</a>
-                </td>
+                <td>Temat</td>
+                <td><b>${task.topic}</b></td>
             </tr>
-        </c:forEach>
-
-        </tbody>
-    </table>
+            <tr>
+                <td>Opis</td>
+                <td><b>${task.describes}</b></td>
+            </tr>
+            <tr>
+                <td>Data utworzenia</td>
+                <td><b>${task.created}</b></td>
+            </tr>
+            <tr>
+                <td>Priorytet</td>
+                <td><b>${task.priority.name}</b></td>
+            </tr>
+            <tr>
+                <td>Przydzielony użytkownik</td>
+                <td><b>${task.project.user.login}</b></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- FOOTER START -->

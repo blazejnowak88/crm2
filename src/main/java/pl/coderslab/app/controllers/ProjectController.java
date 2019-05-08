@@ -110,6 +110,30 @@ public class ProjectController {
         return "project_task";
     }
 
+    @GetMapping("/task/task_description")
+    public String getTaskDescription(Model model,@RequestParam("task_id") Long task_id){
+        Task task = taskRepository.findById(task_id).get();
+        model.addAttribute("task",task);
+        return "task_description";
+    }
+
+    @GetMapping("/task/task_edition")
+    public String getTaskEdition(Model model,@RequestParam("task_id") Long task_id){
+        Task task = taskRepository.findById(task_id).get();
+        model.addAttribute("task",task);
+        return "task_edition";
+    }
+
+    @PostMapping("/task/update")
+    public String updateTask(Model model, @ModelAttribute("task") Task task) {
+        Task update = taskRepository.findById(task.getId()).get();
+        update.setTopic(task.getTopic());
+        update.setDescribes(task.getDescribes());
+        taskRepository.save(update);
+
+        return "task_description";
+    }
+
     /*@Autowired
     ProjectRepository projectRepository;
 

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
 <html>
@@ -25,13 +26,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="index">Home</a>
+                <a class="nav-link" href="../index">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="projects">Projekty</a>
+                <a class="nav-link" href="../projects">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="users">Użytkownicy</a>
+                <a class="nav-link" href="../users">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="statusy.html">Statusy</a>
@@ -45,42 +46,23 @@
 <!-- HEADER END -->
 
 <div class="row m-5">
-    <div class="col-8">
-        <h1>Lista zadań projektu: ${project.name}</h1>
+    <div class="col-12">
+        <h1>Edytuj zadanie</h1>
     </div>
-    <div class="col-4 text-right">
-        <a href="add_task" class="btn btn-primary">Dodaj nowe zadanie</a>
-    </div>
-    <div class="clearfix"></div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Data utworzenia</th>
-            <th>Temat</th>
-            <th>Użytkownik</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${project.tasks}" var="task">
-            <tr>
-                <td>${task.created}</td>
-                <td>${task.topic}</td>
-                <td>${user.name}</td>
-                <td>
-                    <a href="<c:url value="task/task_description">
-                        <c:param name="task_id" value="${task.id}"/>
-                    </c:url>">Szczegoly</a>
-                    /
-                    <a href="<c:url value="task/task_edition">
-                        <c:param name="task_id" value="${task.id}"/>
-                    </c:url>">Edycja</a>
-                </td>
-            </tr>
-        </c:forEach>
+    <div class="col-6">
+        <form:form method="post" action="/task/update" modelAttribute="task">
+            <form:input type="hidden" path="id"/>
+            <label for="name">Temat</label>
+                <form:input type="text" name="name" class="form-control" id="name" path="topic"/>
 
-        </tbody>
-    </table>
+                <label for="description">Opis</label>
+                <form:textarea class="form-control" id="description" name="description" path="describes"/>
+
+
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        </form:form>
+    </div>
+
 </div>
 
 <!-- FOOTER START -->
