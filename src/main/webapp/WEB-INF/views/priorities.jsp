@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <title>CRM</title>
 </head>
@@ -26,19 +26,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="../index">Home</a>
+                <a class="nav-link" href="index">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../projects">Projekty</a>
+                <a class="nav-link" href="projects">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../users">Użytkownicy</a>
+                <a class="nav-link" href="users">Użytkownicy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="statusy.html">Statusy</a>
+                <a class="nav-link" href="statuses">Statusy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="priorytety.html">Priorytety</a>
+                <a class="nav-link" href="priorities">Priorytety</a>
             </li>
         </ul>
     </div>
@@ -46,28 +46,32 @@
 <!-- HEADER END -->
 
 <div class="row m-5">
-    <div class="col-12">
-        <h1>Dodaj nowy projekt</h1>
+    <div class="col-8">
+        <h1>Priorytety</h1>
     </div>
-    <div class="col-6">
-        <form:form method="post" action="/projects/add" modelAttribute="project">
-
-                <label for="name">Nazwa projektu</label>
-                <form:input type="text" name="name" path="name" class="form-control" id="name"/>
-
-                <label for="describes">Opis</label>
-                <form:input type="text" class="form-control" path="describes" id="describes" name="describes"/>
-
-                <label for="www">Strona WWW</label>
-                <form:input type="text" class="form-control" path="www" id="www" name="www"/>
-
-                <form:checkbox class="form-check-input" id="activity" name="activity" path="activity"/>
-                <label class="form-check-label" for="activity">Aktywny</label>
-
-            <button type="submit" class="btn btn-primary">Dodaj projekt</button>
-        </form:form>
-    </div>
-
+    <div class="clearfix"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Aktywny</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${priorities}" var="priority">
+            <tr>
+                <td>${priority.name}</td>
+                <td>${priority.activity}</td>
+                <td>
+                    <a href="<c:url value="priority_edition">
+                        <c:param name="priority_id" value="${priority.id}"/>
+                    </c:url>">Edycja</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 
 <!-- FOOTER START -->

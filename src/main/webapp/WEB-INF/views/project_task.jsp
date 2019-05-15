@@ -46,7 +46,7 @@
 
 <div class="row m-5">
     <div class="col-8">
-        <h1>Lista zadań projektu: Projekt testowy</h1>
+        <h1>Lista zadań projektu: </h1>
     </div>
     <div class="col-4 text-right">
         <a href="<c:url value="/task/add_new">

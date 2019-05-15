@@ -26,13 +26,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="../index">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../projects">Projekty</a>
+                <a class="nav-link" href="projekty.html">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../users">Użytkownicy</a>
+                <a class="nav-link" href="uzytkownicy.html">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="statusy.html">Statusy</a>
@@ -46,28 +46,34 @@
 <!-- HEADER END -->
 
 <div class="row m-5">
-    <div class="col-12">
-        <h1>Dodaj nowy projekt</h1>
+    <div class="col-8">
+        <h1>Statusy</h1>
     </div>
-    <div class="col-6">
-        <form:form method="post" action="/projects/add" modelAttribute="project">
-
-                <label for="name">Nazwa projektu</label>
-                <form:input type="text" name="name" path="name" class="form-control" id="name"/>
-
-                <label for="describes">Opis</label>
-                <form:input type="text" class="form-control" path="describes" id="describes" name="describes"/>
-
-                <label for="www">Strona WWW</label>
-                <form:input type="text" class="form-control" path="www" id="www" name="www"/>
-
-                <form:checkbox class="form-check-input" id="activity" name="activity" path="activity"/>
-                <label class="form-check-label" for="activity">Aktywny</label>
-
-            <button type="submit" class="btn btn-primary">Dodaj projekt</button>
-        </form:form>
-    </div>
-
+    <div class="clearfix"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Aktywny</th>
+            <th>Kolejność sortowania</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${statuses}" var="status">
+            <tr>
+                <td>${status.name}</td>
+                <td>${status.activity}</td>
+                <td>${status.sorted}</td>
+                <td>
+                    <a href="<c:url value="status_edition">
+                        <c:param name="status_id" value="${status.id}"/>
+                    </c:url>">Edycja</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 
 <!-- FOOTER START -->

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <title>CRM</title>
 </head>
@@ -26,13 +26,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="../index">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../projects">Projekty</a>
+                <a class="nav-link" href="projekty.html">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../users">Użytkownicy</a>
+                <a class="nav-link" href="uzytkownicy.html">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="statusy.html">Statusy</a>
@@ -47,24 +47,24 @@
 
 <div class="row m-5">
     <div class="col-12">
-        <h1>Dodaj nowy projekt</h1>
+        <h1>Edycja statusu</h1>
     </div>
     <div class="col-6">
-        <form:form method="post" action="/projects/add" modelAttribute="project">
+        <form:form method="post" action="status_update" modelAttribute="status">
+            <form:hidden path="id"/>
 
-                <label for="name">Nazwa projektu</label>
-                <form:input type="text" name="name" path="name" class="form-control" id="name"/>
+            <label for="name">Nazwa statusu</label>
+            <form:input type="text" name="name" path="name" class="form-control" id="name"/>
 
-                <label for="describes">Opis</label>
-                <form:input type="text" class="form-control" path="describes" id="describes" name="describes"/>
+            <label for="activity">Aktywność</label>
+            <form:input type="text" class="form-control" path="activity" id="activity" name="activity"/>
 
-                <label for="www">Strona WWW</label>
-                <form:input type="text" class="form-control" path="www" id="www" name="www"/>
+            <label for="sorted">Sortowanie</label>
+            <form:input type="number" class="form-control" path="sorted" id="sorted" name="sorted"/>
 
-                <form:checkbox class="form-check-input" id="activity" name="activity" path="activity"/>
-                <label class="form-check-label" for="activity">Aktywny</label>
 
-            <button type="submit" class="btn btn-primary">Dodaj projekt</button>
+
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
         </form:form>
     </div>
 
