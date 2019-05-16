@@ -22,14 +22,20 @@ public class PriorityController {
     PriorityRepository priorityRepository;
 
     @GetMapping("priorities")
-    public String getPriorities(Model model){
+    public String getPriorities(HttpSession session,Model model){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         List<Priority> priorities = priorityRepository.findAll();
         model.addAttribute("priorities",priorities);
         return "priorities";
     }
 
     @GetMapping("priority_edition")
-    public String getEdition(Model model,@RequestParam("priority_id") Long priority_id){
+    public String getEdition(HttpSession session,Model model,@RequestParam("priority_id") Long priority_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Priority priority = priorityRepository.findById(priority_id).get();
         model.addAttribute("priority",priority);
         return "priority_edition";

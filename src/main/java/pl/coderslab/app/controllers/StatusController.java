@@ -11,6 +11,7 @@ import pl.coderslab.app.models.Project;
 import pl.coderslab.app.models.Status;
 import pl.coderslab.app.repository.StatusRepository;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,21 +20,30 @@ public class StatusController {
     StatusRepository statusRepository;
 
     @GetMapping("statuses")
-    public String getStatuses(Model model){
+    public String getStatuses(HttpSession session,Model model){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         List<Status> statuses = statusRepository.findAll();
         model.addAttribute("statuses",statuses);
         return "statuses";
     }
 
     @GetMapping("status_edition")
-    public String getEdition(Model model,@RequestParam("status_id") Long status_id){
+    public String getEdition(HttpSession session,Model model,@RequestParam("status_id") Long status_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Status status = statusRepository.findById(status_id).get();
         model.addAttribute("status",status);
         return "status_edition";
     }
 
     @PostMapping("status_update")
-    public String updateStatus(Model model, @ModelAttribute("status") Status status) {
+    public String updateStatus(HttpSession session, Model model, @ModelAttribute("status") Status status) {
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Status update = statusRepository.findById(status.getId()).get();
         update.setName(status.getName());
         update.setActivity(status.getActivity());

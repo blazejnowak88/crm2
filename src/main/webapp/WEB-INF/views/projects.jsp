@@ -40,6 +40,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="priorytety.html">Priorytety</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../logout">Wyloguj</a>
+            </li>
         </ul>
     </div>
 </nav>

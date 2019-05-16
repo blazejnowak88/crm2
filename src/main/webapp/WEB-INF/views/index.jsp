@@ -95,36 +95,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Jan Kowalski</td>
-            <td><a href="#">Projekt testowy</a></td>
-            <td>Projekt został utworzony.</td>
-        </tr>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Jan Kowalski</td>
-            <td><a href="#">Projekt testowy</a></td>
-            <td>Projekt został utworzony.</td>
-        </tr>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Jan Kowalski</td>
-            <td><a href="#">Projekt testowy</a></td>
-            <td>Projekt został utworzony.</td>
-        </tr>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Jan Kowalski</td>
-            <td><a href="#">Projekt testowy</a></td>
-            <td>Projekt został utworzony.</td>
-        </tr>
-        <tr>
-            <td>2019-04-01 23:00:00</td>
-            <td>Jan Kowalski</td>
-            <td><a href="#">Projekt testowy</a></td>
-            <td>Projekt został utworzony.</td>
-        </tr>
+        <c:forEach items="${projects}" var="project">
+            <tr>
+                <td>${project.created}</td>
+                <td>${project.name}</td>
+                <td>${project.ident}</td>
+                <td>
+                    <a href="<c:url value="project_task">
+                        <c:param name="project_id" value="${project.id}"/>
+                    </c:url>">Zadania</a>
+                    /
+                    <a href="<c:url value="project_description">
+                        <c:param name="project_id" value="${project.id}"/>
+                    </c:url>">Szczegoly</a>
+                    /
+                    <a href="<c:url value="project_edition">
+                        <c:param name="project_id" value="${project.id}"/>
+                    </c:url>">Edycja</a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

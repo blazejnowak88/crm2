@@ -2,6 +2,7 @@ package pl.coderslab.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,8 @@ public class HomeController {
     private ProjectRepository projectRepository;
     @Autowired
     private UserRepository userRepository;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping()
     public String getIndex(HttpSession session, Model model) {
@@ -55,7 +58,7 @@ public class HomeController {
         Optional<User> userOptional = userRepository.findByLogin(username);
         if(userOptional.isPresent()){
             User user = userOptional.get();
-            if(user.getPassword().equals(password)){
+            if(bCryptPasswordEncoder.matches(password,user.getPassword())){
                 session.setAttribute("user",user);
                 return "redirect:/index";
             }

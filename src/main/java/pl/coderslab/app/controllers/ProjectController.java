@@ -3,9 +3,11 @@ package pl.coderslab.app.controllers;
 import pl.coderslab.app.models.Priority;
 import pl.coderslab.app.models.Project;
 import pl.coderslab.app.models.Task;
+import pl.coderslab.app.models.User;
 import pl.coderslab.app.repository.PriorityRepository;
 import pl.coderslab.app.repository.ProjectRepository;
 import pl.coderslab.app.repository.TaskRepository;
+import pl.coderslab.app.repository.UserRepository;
 import pl.coderslab.app.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,9 +29,14 @@ public class ProjectController {
     private TaskRepository taskRepository;
     @Autowired
     private PriorityRepository priorityRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("project_description")
-    public String getDescription(Model model,@RequestParam("project_id") Long project_id){
+    public String getDescription(HttpSession session,Model model,@RequestParam("project_id") Long project_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Project project = projectRepository.findById(project_id).get();
         model.addAttribute("project",project);
         model.addAttribute("user",project.getUser());
@@ -36,7 +44,10 @@ public class ProjectController {
     }
 
     @GetMapping("project_task")
-    public String getTasks(Model model,@RequestParam("project_id") Long project_id){
+    public String getTasks(HttpSession session, Model model, @RequestParam("project_id") Long project_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Project project = projectRepository.findById(project_id).get();
         model.addAttribute("project",project);
         model.addAttribute("user",project.getUser());
@@ -44,15 +55,21 @@ public class ProjectController {
     }
 
     @GetMapping("project_edition")
-    public String getEdition(Model model,@RequestParam("project_id") Long project_id){
+    public String getEdition(HttpSession session,Model model,@RequestParam("project_id") Long project_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Project project = projectRepository.findById(project_id).get();
         model.addAttribute("project",project);
         model.addAttribute("user",project.getUser());
         return "project_edition";
     }
 
-    @PostMapping("/projects/update")
-    public String updateProject(Model model, @ModelAttribute("project") Project project) {
+    @PostMapping("projects_update")
+    public String updateProject(HttpSession session,Model model, @ModelAttribute("project") Project project) {
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Project update = projectRepository.findById(project.getId()).get();
         update.setActivity(project.isActivity());
         update.setName(project.getName());
@@ -65,33 +82,49 @@ public class ProjectController {
     }
 
     @GetMapping("projects_add_new")
-    public String addProject(Model model){
+    public String addProject(HttpSession session,Model model){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         model.addAttribute("project",new Project());
         return "projects_add_new";
     }
 
-    @PostMapping("/projects/add")
-    public String addProject(Model model, @ModelAttribute("project") Project project) {
+    @PostMapping("projects_add")
+    public String addProject(HttpSession session,Model model, @ModelAttribute("project") Project project) {
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         project.setCreated(LocalDateTime.now());
+        User user = userRepository.findByLogin(((User)session.getAttribute("user")).getLogin()).get();
+        project.setUser(user);
+        user.getProject().add(project);
         projectRepository.save(project);
+        userRepository.save(user);
         model.addAttribute("projects",projectRepository.findAll());
         return "projects";
     }
 
-    @GetMapping("/task/add_new")
-    public String addTaskToProject(Model model , @RequestParam("project_id") Long project_id){
+    @GetMapping("task_add_new")
+    public String addTaskToProject(HttpSession session,Model model , @RequestParam("project_id") Long project_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         model.addAttribute("project",projectRepository.findById(project_id).get());
         return "task_add";
     }
 
-    @PostMapping("/task/add")
-    public String addTask(Model model,
+    @PostMapping("task_add")
+    public String addTask(HttpSession session,Model model,
                           @RequestParam("project_id") Long project_id,
                           @RequestParam("topic") String topic,
                           @RequestParam("describes") String description,
                           @RequestParam("priority_name") String priorityName,
                           @RequestParam("priority_activity") String priorityActivity
                           ) {
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Project project = projectRepository.findById(project_id).get();
         Task t =new Task();
         t.setTopic(topic);
@@ -110,22 +143,31 @@ public class ProjectController {
         return "project_task";
     }
 
-    @GetMapping("/task/task_description")
-    public String getTaskDescription(Model model,@RequestParam("task_id") Long task_id){
+    @GetMapping("task_task_description")
+    public String getTaskDescription(HttpSession session,Model model,@RequestParam("task_id") Long task_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Task task = taskRepository.findById(task_id).get();
         model.addAttribute("task",task);
         return "task_description";
     }
 
-    @GetMapping("/task/task_edition")
-    public String getTaskEdition(Model model,@RequestParam("task_id") Long task_id){
+    @GetMapping("task_task_edition")
+    public String getTaskEdition(HttpSession session,Model model,@RequestParam("task_id") Long task_id){
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Task task = taskRepository.findById(task_id).get();
         model.addAttribute("task",task);
         return "task_edition";
     }
 
-    @PostMapping("/task/update")
-    public String updateTask(Model model, @ModelAttribute("task") Task task) {
+    @PostMapping("task_update")
+    public String updateTask(HttpSession session,Model model, @ModelAttribute("task") Task task) {
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         Task update = taskRepository.findById(task.getId()).get();
         update.setTopic(task.getTopic());
         update.setDescribes(task.getDescribes());
@@ -134,63 +176,7 @@ public class ProjectController {
         return "task_description";
     }
 
-    /*@Autowired
-    ProjectRepository projectRepository;
 
-    @Autowired
-    ProjectService projectService;
-
-    @GetMapping("/add")
-    public String getTweetForm(Model model) {
-        model.addAttribute("project", new Project());
-        return "project";
-    }
-
-
-    @PostMapping("/add")
-    public String addTweet(Model model, @ModelAttribute Project project) {
-        Project result = projectRepository.save(project);
-        //model.addAttribute("users", Arrays.asList(result));
-        List<Project> projects = projectRepository.findAll();
-        model.addAttribute("tweets", projects);
-        return "tweetsList";
-    }
-
-    @GetMapping("/list")
-    public String getList(Model model) {
-        List<Project> projects = projectRepository.findAll();
-        model.addAttribute("projects", projects);
-        return "projectList";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        projectService.delete(id);
-        return "redirect:../list";
-    }
-
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable Long id, Model model) {
-        Project project = projectService.read(id);
-        model.addAttribute("project", project);
-        return "project";
-    }
-
-    @PostMapping("/update/{id}")
-    public String update(@ModelAttribute Project project, BindingResult result) {
-        if (result.hasErrors()) {
-            return "project";
-        }
-        projectService.update(project);
-        return "redirect:../list";
-    }
-
-    @GetMapping("/user/search-project")
-    public String lista(Model model) {
-        List<Project> projects = projectService.findAll();
-        model.addAttribute("projects", projects);
-        return "projectsList";
-    }*/
 }
 
 

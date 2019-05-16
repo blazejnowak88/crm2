@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 
     <title>CRM</title>
 </head>
@@ -26,19 +26,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="index">Home</a>
+                <a class="nav-link" href="../index">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="projects">Projekty</a>
+                <a class="nav-link" href="../projects">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="users">Użytkownicy</a>
+                <a class="nav-link" href="../users">Użytkownicy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="statuses">Statusy</a>
+                <a class="nav-link" href="../statuses">Statusy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="priorities">Priorytety</a>
+                <a class="nav-link" href="../priorities">Priorytety</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../logout">Wyloguj</a>
             </li>
         </ul>
     </div>
