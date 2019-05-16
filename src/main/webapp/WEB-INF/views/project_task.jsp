@@ -34,10 +34,10 @@
                 <a class="nav-link" href="users">Użytkownicy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="statusy.html">Statusy</a>
+                <a class="nav-link" href="statuses">Statusy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="priorytety.html">Priorytety</a>
+                <a class="nav-link" href="priorities">Priorytety</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="logout">Wyloguj</a>
@@ -52,7 +52,7 @@
         <h1>Lista zadań projektu: </h1>
     </div>
     <div class="col-4 text-right">
-        <a href="<c:url value="/task/add_new">
+        <a href="<c:url value="task_add_new">
                         <c:param name="project_id" value="${project.id}"/>
                     </c:url>">Dodaj nowe zdanie</a>
     </div>
@@ -71,13 +71,13 @@
             <tr>
                 <td>${task.created}</td>
                 <td>${task.topic}</td>
-                <td>${user.name}</td>
+                <td>${user.login}</td>
                 <td>
-                    <a href="<c:url value="task_description">
+                    <a href="<c:url value="task_task_description">
                         <c:param name="task_id" value="${task.id}"/>
                     </c:url>">Szczegoly</a>
                     /
-                    <a href="<c:url value="task_edition">
+                    <a href="<c:url value="task_task_edition">
                         <c:param name="task_id" value="${task.id}"/>
                     </c:url>">Edycja</a>
                 </td>

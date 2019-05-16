@@ -98,7 +98,7 @@
         <c:forEach items="${projects}" var="project">
             <tr>
                 <td>${project.created}</td>
-                <td>${project.name}</td>
+                <td>${project.user.login}</td>
                 <td>${project.ident}</td>
                 <td>
                     <a href="<c:url value="project_task">

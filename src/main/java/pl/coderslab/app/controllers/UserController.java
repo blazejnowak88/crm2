@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping()
 public class UserController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UserController {
 
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    @GetMapping()
+    @GetMapping("users")
     public String getUsersList(HttpSession session, Model model) {
         if(session.getAttribute("user") == null){
             return "login";
@@ -37,7 +37,7 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("add")
+    @GetMapping("users_add")
     public String getUserForm(HttpSession session,Model model) {
         if(session.getAttribute("user") == null){
             return "login";
@@ -47,7 +47,7 @@ public class UserController {
     }
 
 
-    @PostMapping("add")
+    @PostMapping("users_add")
     public String addUser(HttpSession session,Model model, @ModelAttribute User user) {
         if(session.getAttribute("user") == null){
             return "login";
@@ -59,7 +59,7 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("user_edition")
+    @GetMapping("users_user_edition")
     public String getUserEdition(HttpSession session,Model model,@RequestParam("user_id") Long user_id){
         if(session.getAttribute("user") == null){
             return "login";
@@ -69,7 +69,7 @@ public class UserController {
         return "user_edition";
     }
 
-    @PostMapping("update")
+    @PostMapping("users_update")
     public String updateUser(HttpSession session,Model model, @ModelAttribute("user") User user) {
         if(session.getAttribute("user") == null){
             return "login";

@@ -26,22 +26,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="../index">Home</a>
+                <a class="nav-link" href="index">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../projects">Projekty</a>
+                <a class="nav-link" href="projects">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../users">Użytkownicy</a>
+                <a class="nav-link" href="users">Użytkownicy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../statuses">Statusy</a>
+                <a class="nav-link" href="statuses">Statusy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../priorities">Priorytety</a>
+                <a class="nav-link" href="priorities">Priorytety</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../logout">Wyloguj</a>
+                <a class="nav-link" href="logout">Wyloguj</a>
             </li>
         </ul>
     </div>
@@ -53,7 +53,7 @@
         <h1>Dodaj nowego użytkownika</h1>
     </div>
     <div class="col-6">
-        <form:form method="post" action="/users/add" modelAttribute="user">
+        <form:form method="post" action="users_add" modelAttribute="user">
                 <label for="login">Login</label>
                 <form:input type="text" name="login" path="login" class="form-control" id="login"/>
 
